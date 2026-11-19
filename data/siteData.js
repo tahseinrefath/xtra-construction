@@ -14,7 +14,7 @@ export const siteData = {
     ],
     footerAbout:
       "A company is any entity that engages in business. Companies can be structured in different ways. For example, your company can be a sole proprietorship, a partnership, or a corporation.",
-    copyright: "© 2026 XTRA, Powered by WordPress",
+    copyright: "© 2026 XTRA, Powered by Refath with Jayam ",
   },
 
   navigation: [
@@ -306,7 +306,7 @@ export const siteData = {
   footer: {
     logo: "/assets/footer-logo-construction.png",
     brandLogo: "/assets/logo-construction.png",
-    copyright: "© 2026 XTRA, Powered by WordPress",
+    copyright: "© 2026 XTRA, Powered by Refath with Jayam ",
     links: [
       { label: "Contact Us", href: "/contact" },
       { label: "About", href: "/about" },
