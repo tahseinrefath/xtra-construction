@@ -9,7 +9,7 @@ export default function FeatureCards() {
 
   const renderIcon = (iconName) => {
     const iconClass =
-      'w-8 h-8 text-[#f4c03b] group-hover:text-[#243344] transition-colors duration-300 stroke-[2]';
+      'w-8 h-8 text-current stroke-current transition-colors duration-300 stroke-[2]';
 
     switch (iconName) {
       case 'Building2':
@@ -38,7 +38,7 @@ export default function FeatureCards() {
             </div>
 
             {/* Icon Box */}
-            <div className="w-16 h-16 bg-[#243344] group-hover:bg-[#f4c03b] flex items-center justify-center mb-6 transition-all duration-300 shadow-sm group-hover:shadow-md">
+            <div className="w-16 h-16 bg-[#243344] text-[#f4c03b] group-hover:bg-[#f4c03b] group-hover:text-[#243344] flex items-center justify-center mb-6 transition-all duration-300 shadow-sm group-hover:shadow-md [&>svg]:text-current [&>svg]:stroke-current">
               {renderIcon(card.icon)}
             </div>
 
