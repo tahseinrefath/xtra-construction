@@ -75,10 +75,10 @@ export default function MapSection() {
                 <Icon className="w-6 h-6 text-[#243344] group-hover:text-[#f4c03b] transition-colors stroke-[2]" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-extrabold leading-none mb-1">
+                <p className="text-[11px] text-gray-400 uppercase tracking-wider font-bold leading-none mb-1">
                   {label}
                 </p>
-                <p className="text-xs sm:text-sm text-[#243344] font-extrabold leading-tight truncate">
+                <p className="text-xs sm:text-sm text-[#243344] font-extrabold leading-snug">
                   {value}
                 </p>
               </div>

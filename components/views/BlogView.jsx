@@ -149,6 +149,10 @@ export default function BlogView() {
                         <img
                           src={post.image}
                           alt={post.title}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = '/assets/about-company.jpg';
+                          }}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                         <div className="absolute top-4 left-4 bg-[#f4c03b] text-[#243344] font-bold text-[10px] uppercase tracking-wider px-3 py-1 shadow">
@@ -286,6 +290,10 @@ export default function BlogView() {
                         <img
                           src={r.image}
                           alt={r.title}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = '/assets/about-company.jpg';
+                          }}
                           className="w-14 h-14 object-cover flex-shrink-0 group-hover:opacity-80 transition-opacity"
                         />
                         <div>
