@@ -63,7 +63,7 @@ export default function AboutSection() {
               ))}
             </div>
 
-            <Button onClick={() => setModalOpen(true)} variant="primary" size="md">
+            <Button onClick={() => setModalOpen(true)} variant="primaryDarkHover" size="md">
               {about.ctaText}
             </Button>
           </div>

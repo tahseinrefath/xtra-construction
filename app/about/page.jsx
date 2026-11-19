@@ -151,10 +151,10 @@ export default function AboutPage() {
                 </div>
 
                 <div className="mt-10 flex flex-wrap gap-4 items-center">
-                  <Button href="/contact" variant="primary">
+                  <Button href="/contact" variant="primaryDarkHover">
                     Get Free Quote
                   </Button>
-                  <Button href="/services" variant="outline">
+                  <Button href="/services" variant="outlineDark">
                     Explore Services
                   </Button>
                 </div>

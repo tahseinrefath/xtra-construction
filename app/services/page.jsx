@@ -200,7 +200,7 @@ export default function ServicesPage() {
                       {/* Action */}
                       <Button
                         href="/contact"
-                        variant="primary"
+                        variant="primaryDarkHover"
                         className="w-full flex items-center justify-center gap-2"
                       >
                         Request Consultation
