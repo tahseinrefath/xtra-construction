@@ -19,11 +19,18 @@ import {
   Leaf,
   CheckCircle,
   ArrowRight,
+  Lightbulb,
+  Plus,
+  Minus,
+  HelpCircle,
+  Shield,
+  Layers,
 } from 'lucide-react';
 
 export default function ServicesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
 
   const services = [
     {
@@ -79,6 +86,43 @@ export default function ServicesPage() {
       icon: Leaf,
       desc: 'Net-zero energy architectural projects incorporating solar photovoltaics, rainwater harvesting, geothermal heating, and low-VOC non-toxic materials.',
       points: ['LEED Platinum certification prep', 'Rooftop solar microgrid setups', 'Greywater bio-filtration', 'Passivhaus thermal efficiency'],
+    },
+  ];
+
+  const tips = [
+    {
+      icon: Layers,
+      title: 'Geotechnical Soil Core Sampling',
+      desc: 'Always verify subterranean load-bearing capacity before pouring footings. Soil variability causes 78% of foundation shifts.',
+    },
+    {
+      icon: Shield,
+      title: 'Vapor Retarder Integrity',
+      desc: 'Under-slab vapor barriers must maintain 15 mil puncture resistance to prevent ambient moisture infiltration into finished interiors.',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Pre-Pour Laser Level Verification',
+      desc: 'Double-checking rebar clearances and elevation benchmarks with dual-plane laser receivers eliminates concrete height variations.',
+    },
+  ];
+
+  const faqs = [
+    {
+      q: 'How do you formulate project budgets and milestone estimates?',
+      a: 'We perform complete 5D BIM quantities takeoffs using current regional material indices. Every bid includes detailed trade breakdowns with labor rates, equipment runtimes, and contingency allowances.',
+    },
+    {
+      q: 'Do you manage local municipal building permits and zoning clearances?',
+      a: 'Yes. Our in-house permit expeditor division handles all local zoning approvals, EPA environmental impact reports, stormwater compliance, and historical preservation clearances.',
+    },
+    {
+      q: 'Can client-selected interior designers or MEP subcontractors be incorporated?',
+      a: 'Absolutely. We operate as General Contractor or Construction Manager at Risk (CMAR), offering turnkey open-book coordination for your preferred interior designers or proprietary equipment vendors.',
+    },
+    {
+      q: 'What warranties and performance bonds protect the development?',
+      a: 'Every project is backed by comprehensive 100% Performance & Payment Surety Bonds, a 1-year comprehensive craftsmanship warranty, and a 10-year structural integrity guarantee.',
     },
   ];
 
@@ -166,6 +210,93 @@ export default function ServicesPage() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Construction Tips Callout Banner */}
+        <section className="py-16 bg-[#243344] text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+              <div>
+                <span className="text-xs uppercase tracking-widest font-extrabold text-[#f4c03b] block mb-2">
+                  CONSTRUCTION BEST PRACTICES
+                </span>
+                <h2 className="text-3xl font-extrabold text-white">
+                  Engineering Tips for Long-Lasting Assets
+                </h2>
+              </div>
+              <p className="text-gray-400 text-sm max-w-md mt-3 md:mt-0">
+                Key structural considerations that prevent costly remediation downstream.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {tips.map((t, idx) => {
+                const Icon = t.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="bg-[#1c2734] p-8 border-t-4 border-[#f4c03b] rounded-none hover:translate-y-[-4px] transition-transform duration-300"
+                  >
+                    <div className="w-12 h-12 bg-[#f4c03b]/10 rounded flex items-center justify-center mb-6">
+                      <Icon className="w-6 h-6 text-[#f4c03b]" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2">{t.title}</h3>
+                    <p className="text-xs text-gray-400 leading-relaxed">{t.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Quick FAQ Section */}
+        <section className="py-20 bg-[#f7f9fb] border-b border-gray-200">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              tag="COMMON INQUIRIES"
+              subtitle="Quick Clarifications"
+              title="Frequently Asked Services Questions"
+              centered
+            />
+
+            <div className="mt-12 space-y-4">
+              {faqs.map((faq, i) => {
+                const isOpen = openFaq === i;
+                return (
+                  <div
+                    key={i}
+                    className="bg-white border border-gray-200 transition-all duration-200"
+                  >
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? -1 : i)}
+                      className="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-sm text-[#243344] hover:text-[#f4c03b] transition-colors"
+                    >
+                      <span className="flex items-center gap-3">
+                        <HelpCircle className="w-4 h-4 text-[#f4c03b] flex-shrink-0" />
+                        {faq.q}
+                      </span>
+                      {isOpen ? (
+                        <Minus className="w-4 h-4 text-[#f4c03b] flex-shrink-0" />
+                      ) : (
+                        <Plus className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                      )}
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-1 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-10 text-center">
+              <Button href="/faq" variant="outline">
+                Visit Complete FAQ Center →
+              </Button>
             </div>
           </div>
         </section>
