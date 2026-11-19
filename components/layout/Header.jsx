@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, ChevronDown } from 'lucide-react';
 import { siteData } from '@/data/siteData';
 
@@ -8,6 +10,7 @@ export default function Header({ onOpenMobile }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(false);
   const { navigation } = siteData;
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,17 +30,22 @@ export default function Header({ onOpenMobile }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
-        <a href="#hero" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group">
           <img
             src="/assets/logo-construction.png"
             alt="Construction 2 Theme"
             className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-7">
           {navigation.map((item) => {
+            const isActive =
+              item.href === '/'
+                ? pathname === '/'
+                : pathname && item.href !== '#' && pathname.startsWith(item.href);
+
             if (item.children) {
               return (
                 <div
@@ -46,7 +54,7 @@ export default function Header({ onOpenMobile }) {
                   onMouseEnter={() => setActiveDropdown(true)}
                   onMouseLeave={() => setActiveDropdown(false)}
                 >
-                  <button className="flex items-center gap-1 text-xs font-bold tracking-widest uppercase text-white hover:text-[#f4c03b] transition-colors py-2">
+                  <button className="flex items-center gap-1 text-xs font-bold tracking-widest uppercase text-white hover:text-[#f4c03b] transition-colors py-2 cursor-pointer">
                     <span>{item.label}</span>
                     <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" />
                   </button>
@@ -60,13 +68,17 @@ export default function Header({ onOpenMobile }) {
                     }`}
                   >
                     {item.children.map((sub) => (
-                      <a
+                      <Link
                         key={sub.label}
                         href={sub.href}
-                        className="block px-4 py-2.5 text-xs uppercase font-semibold text-gray-300 hover:text-[#243344] hover:bg-[#f4c03b] transition-colors"
+                        className={`block px-4 py-2.5 text-xs uppercase font-semibold transition-colors ${
+                          pathname === sub.href
+                            ? 'text-[#243344] bg-[#f4c03b]'
+                            : 'text-gray-300 hover:text-[#243344] hover:bg-[#f4c03b]'
+                        }`}
                       >
                         {sub.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -74,29 +86,33 @@ export default function Header({ onOpenMobile }) {
             }
 
             return (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
-                className="text-xs font-bold tracking-widest uppercase text-white hover:text-[#f4c03b] transition-colors relative py-2 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#f4c03b] hover:after:w-full after:transition-all after:duration-300"
+                className={`text-xs font-bold tracking-widest uppercase transition-colors relative py-2 ${
+                  isActive
+                    ? 'text-[#f4c03b] after:w-full'
+                    : 'text-white hover:text-[#f4c03b] after:w-0'
+                } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#f4c03b] hover:after:w-full after:transition-all after:duration-300`}
               >
                 {item.label}
-              </a>
+              </Link>
             );
           })}
         </nav>
 
         {/* Action Button & Mobile Trigger */}
         <div className="flex items-center gap-3">
-          <a
-            href="#quote"
+          <Link
+            href="/contact"
             className="hidden sm:inline-flex bg-[#f4c03b] text-[#243344] font-extrabold text-xs uppercase tracking-wider px-5 py-3 hover:bg-white transition-all duration-300 shadow-sm"
           >
             Free Consultation
-          </a>
+          </Link>
 
           <button
             onClick={onOpenMobile}
-            className="lg:hidden p-2 text-white hover:text-[#f4c03b] transition-colors"
+            className="lg:hidden p-2 text-white hover:text-[#f4c03b] transition-colors cursor-pointer"
             aria-label="Open menu"
           >
             <Menu className="w-6 h-6" />

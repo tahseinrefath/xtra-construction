@@ -18,24 +18,23 @@ export const siteData = {
   },
 
   navigation: [
-    { label: "Home", href: "#hero" },
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Process", href: "#process" },
-    { label: "Projects", href: "#projects" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Process", href: "/#process" },
+    { label: "Projects", href: "/#projects" },
     {
       label: "Pages",
       href: "#",
       children: [
-        { label: "Shop", href: "#" },
-        { label: "Cart", href: "#" },
-        { label: "Wishlist", href: "#" },
-        { label: "My account", href: "#" },
-        { label: "FAQ", href: "#faq" },
+        { label: "Shop", href: "/shop" },
+        { label: "Cart", href: "/cart" },
+        { label: "My account", href: "/my-account" },
+        { label: "FAQ", href: "/faq" },
       ],
     },
-    { label: "Blog", href: "#" },
-    { label: "Contact", href: "#quote" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/contact" },
   ],
 
   heroSlides: [
@@ -311,9 +310,11 @@ export const siteData = {
     brandLogo: "/assets/logo-construction.png",
     copyright: "© 2026 XTRA, Powered by WordPress",
     links: [
-      { label: "Contact Us", href: "#quote" },
-      { label: "About", href: "#about" },
-      { label: "Privacy Policy", href: "#" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "About", href: "/about" },
+      { label: "Services", href: "/services" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Shop", href: "/shop" },
     ],
   },
 };
