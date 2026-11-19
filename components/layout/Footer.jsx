@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 import { siteData } from '@/data/siteData';
 
@@ -61,13 +62,13 @@ export default function Footer() {
           <p>{footer.copyright}</p>
           <div className="flex items-center gap-6">
             {footer.links.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className="hover:text-[#f4c03b] transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
