@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-yellow: #f4c03b;
+  --primary-yellow-hover: #e0ad29;
+  --primary-dark: #243344;
+  --dark-deep: #1c2734;
+  --dark-darker: #16202c;
+  --text-gray: #6c7a89;
+  --light-bg: #f7f9fb;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--primary-dark);
+  background-color: #ffffff;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #f4c03b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e0ad29;
+}
+
+/* Signature Avatar Offset Shadow */
+.avatar-gold-shadow {
+  box-shadow: -15px 15px 0px 0px #f4c03b;
+}
+
+@media (max-width: 768px) {
+  .avatar-gold-shadow {
+    box-shadow: -10px 10px 0px 0px #f4c03b;
+  }
+}
+
+/* Smooth Image Hover Zooms */
+.img-zoom-container {
+  overflow: hidden;
+}
+.img-zoom-container img {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.img-zoom-container:hover img {
+  transform: scale(1.08);
+}
+
+/* Flip card animation for client logos */
+.flip-card {
+  perspective: 1000px;
+}
+.flip-card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
