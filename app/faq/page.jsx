@@ -9,15 +9,15 @@ import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
 import PageBanner from '@/components/layout/PageBanner';
 import SectionHeading from '@/components/ui/SectionHeading';
+import Toast from '@/components/ui/Toast';
 import {
   HelpCircle,
   Plus,
   Minus,
   CheckCircle2,
-  FileText,
-  ShieldAlert,
-  DollarSign,
-  Calendar,
+  Send,
+  Loader2,
+  MessageCircle,
 } from 'lucide-react';
 
 export default function FAQPage() {
@@ -25,6 +25,16 @@ export default function FAQPage() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
   const [openIndex, setOpenIndex] = useState(0);
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const [askForm, setAskForm] = useState({
+    name: '',
+    email: '',
+    topic: 'General Inquiry',
+    question: '',
+  });
+  const [isAsking, setIsAsking] = useState(false);
+  const [askSubmitted, setAskSubmitted] = useState(false);
 
   const categories = [
     { id: 'all', label: 'All Questions' },
@@ -89,6 +99,23 @@ export default function FAQPage() {
     activeCategory === 'all'
       ? faqItems
       : faqItems.filter((item) => item.cat === activeCategory);
+
+  const handleAskSubmit = async (e) => {
+    e.preventDefault();
+    if (!askForm.name || !askForm.email || !askForm.question) {
+      setToastMessage('Please fill out your question and contact info.');
+      return;
+    }
+    setIsAsking(true);
+    await new Promise((r) => setTimeout(r, 1200));
+    setIsAsking(false);
+    setAskSubmitted(true);
+    setToastMessage(`Thanks ${askForm.name}! An engineer will reply regarding your inquiry shortly.`);
+    setTimeout(() => {
+      setAskSubmitted(false);
+      setAskForm({ name: '', email: '', topic: 'General Inquiry', question: '' });
+    }, 4000);
+  };
 
   return (
     <div className="flex-1 flex flex-col min-h-screen">
@@ -186,10 +213,106 @@ export default function FAQPage() {
             </div>
           </div>
         </section>
+
+        {/* Fast Inquiry Ask Us Widget */}
+        <section className="py-20 bg-[#1c2734] text-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-[#243344] p-8 sm:p-12 rounded-none border border-white/10 shadow-2xl">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="w-10 h-10 rounded bg-[#f4c03b] flex items-center justify-center text-[#243344]">
+                  <MessageCircle className="w-5 h-5" />
+                </span>
+                <div>
+                  <span className="text-xs uppercase font-extrabold tracking-widest text-[#f4c03b]">
+                    STILL HAVE QUESTIONS?
+                  </span>
+                  <h3 className="text-2xl font-bold text-white">
+                    Ask an On-Duty Structural Engineer
+                  </h3>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+                Cannot find the answer you need in our knowledge base? Send your question directly to our technical desk for an authoritative response.
+              </p>
+
+              {askSubmitted ? (
+                <div className="py-8 text-center flex flex-col items-center">
+                  <CheckCircle2 className="w-12 h-12 text-[#f4c03b] mb-3" />
+                  <p className="text-lg font-bold text-white">Question Logged Successfully!</p>
+                  <p className="text-xs text-gray-400 mt-1">Our engineering office will respond to your email within a few hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleAskSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      required
+                      value={askForm.name}
+                      onChange={(e) => setAskForm({ ...askForm, name: e.target.value })}
+                      className="bg-[#1c2734] border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#f4c03b]"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      required
+                      value={askForm.email}
+                      onChange={(e) => setAskForm({ ...askForm, email: e.target.value })}
+                      className="bg-[#1c2734] border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#f4c03b]"
+                    />
+                    <select
+                      value={askForm.topic}
+                      onChange={(e) => setAskForm({ ...askForm, topic: e.target.value })}
+                      className="bg-[#1c2734] border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#f4c03b]"
+                    >
+                      <option value="General Inquiry">General Inquiry</option>
+                      <option value="Cost & Estimating">Cost & Estimating</option>
+                      <option value="Permits & Zoning">Permits & Zoning</option>
+                      <option value="Structural Safety">Structural Safety</option>
+                    </select>
+                  </div>
+
+                  <textarea
+                    rows={4}
+                    placeholder="Type your specific technical or process question here..."
+                    required
+                    value={askForm.question}
+                    onChange={(e) => setAskForm({ ...askForm, question: e.target.value })}
+                    className="w-full bg-[#1c2734] border border-white/10 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#f4c03b] resize-none"
+                  />
+
+                  <button
+                    type="submit"
+                    disabled={isAsking}
+                    className="bg-[#f4c03b] text-[#243344] font-bold text-xs uppercase tracking-wider px-8 py-3.5 hover:bg-white transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                  >
+                    {isAsking ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Submitting Question...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Submit Question</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
       <BackToTop />
+
+      <Toast
+        isOpen={Boolean(toastMessage)}
+        message={toastMessage}
+        onClose={() => setToastMessage(null)}
+      />
     </div>
   );
 }
