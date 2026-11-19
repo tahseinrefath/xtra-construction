@@ -37,7 +37,7 @@ export default function ProjectsGallery() {
   };
 
   return (
-    <section id="projects" className="py-20 md:py-28 bg-white">
+    <section id="projects" className="scroll-mt-20 md:scroll-mt-24 py-20 md:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <SectionHeading

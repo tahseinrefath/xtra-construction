@@ -55,7 +55,7 @@ export default function ShopPage() {
       rating: 4.8,
       reviews: 31,
       badge: 'Best Seller',
-      image: '/assets/portfolio7-600x600.jpg',
+      image: '/assets/portfolio7-1-600x600.jpg',
       desc: 'Industrial masonry drills, core cutters, and diamond abrasive wheel sets.',
     },
     {
@@ -66,7 +66,7 @@ export default function ShopPage() {
       rating: 5,
       reviews: 42,
       badge: 'Featured',
-      image: '/assets/portfolio10-600x600.jpg',
+      image: '/assets/portfolio10-1-600x600.jpg',
       desc: 'Complete supervisor surveying station: optical transit, tripod, and digital stadia.',
     },
     {
@@ -77,7 +77,7 @@ export default function ShopPage() {
       rating: 4.6,
       reviews: 12,
       badge: 'New',
-      image: '/assets/portfolio3-600x600.jpg',
+      image: '/assets/portfolio3-1-600x600.jpg',
       desc: 'Self-leveling 360-degree green beam rotary laser for foundation benchmarking.',
     },
     {
@@ -88,7 +88,7 @@ export default function ShopPage() {
       rating: 4.9,
       reviews: 57,
       badge: 'Best Seller',
-      image: '/assets/portfolio6-600x600.jpg',
+      image: '/assets/portfolio6-1-600x600.jpg',
       desc: '5,000-count galvanized epoxy-coated rebar ties and dual-battery automated tyer.',
     },
   ];

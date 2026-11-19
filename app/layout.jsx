@@ -13,6 +13,11 @@ export const metadata = {
     'Architecture',
     'Contractor',
   ],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
 };
 
 export const viewport = {
