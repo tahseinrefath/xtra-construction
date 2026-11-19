@@ -9,12 +9,30 @@ import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
 import PageBanner from '@/components/layout/PageBanner';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { Lock, User, Mail, ShieldCheck, KeyRound, UserPlus } from 'lucide-react';
+import Toast from '@/components/ui/Toast';
+import {
+  Lock,
+  User,
+  Mail,
+  ShieldCheck,
+  KeyRound,
+  UserPlus,
+  Eye,
+  EyeOff,
+  Loader2,
+  CheckCircle2,
+} from 'lucide-react';
 
 export default function MyAccountPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('both'); // 'login' | 'register' | 'both'
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const [showLoginPass, setShowLoginPass] = useState(false);
+  const [showRegPass, setShowRegPass] = useState(false);
+
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
 
   const [loginForm, setLoginForm] = useState({
     username: '',
@@ -27,6 +45,37 @@ export default function MyAccountPage() {
     password: '',
     company: '',
   });
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    if (!loginForm.username || !loginForm.password) {
+      setToastMessage('Please enter both username/email and password.');
+      return;
+    }
+
+    setIsLoggingIn(true);
+    await new Promise((r) => setTimeout(r, 1400));
+    setIsLoggingIn(false);
+    setToastMessage(`Welcome back! Session authorized for ${loginForm.username}. Loading project feeds...`);
+  };
+
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+    if (!registerForm.email || !registerForm.password) {
+      setToastMessage('Please supply a valid corporate email and password.');
+      return;
+    }
+    if (registerForm.password.length < 8) {
+      setToastMessage('Password must be at least 8 characters long.');
+      return;
+    }
+
+    setIsRegistering(true);
+    await new Promise((r) => setTimeout(r, 1500));
+    setIsRegistering(false);
+    setToastMessage(`Registration confirmation dispatched to ${registerForm.email}. Please verify your identity.`);
+    setRegisterForm({ email: '', password: '', company: '' });
+  };
 
   return (
     <div className="flex-1 flex flex-col min-h-screen">
@@ -69,7 +118,7 @@ export default function MyAccountPage() {
                   </div>
                 </div>
 
-                <form className="space-y-5">
+                <form onSubmit={handleLoginSubmit} className="space-y-5">
                   <div>
                     <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
                       Username or Email Address <span className="text-red-500">*</span>
@@ -93,14 +142,21 @@ export default function MyAccountPage() {
                     </label>
                     <div className="relative">
                       <input
-                        type="password"
+                        type={showLoginPass ? 'text' : 'password'}
                         required
                         value={loginForm.password}
                         onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
-                        className="w-full bg-white border border-gray-300 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b]"
+                        className="w-full bg-white border border-gray-300 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] pr-10"
                         placeholder="••••••••••••"
                       />
-                      <KeyRound className="w-4 h-4 text-gray-400 absolute right-3.5 top-3.5" />
+                      <button
+                        type="button"
+                        onClick={() => setShowLoginPass(!showLoginPass)}
+                        className="text-gray-400 hover:text-gray-600 absolute right-3.5 top-3.5 cursor-pointer"
+                        aria-label="Toggle password visibility"
+                      >
+                        {showLoginPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
                     </div>
                   </div>
 
@@ -122,9 +178,17 @@ export default function MyAccountPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-[#243344] hover:bg-[#f4c03b] hover:text-[#243344] text-white font-extrabold text-xs uppercase tracking-widest py-4 transition-all duration-300 shadow cursor-pointer mt-4"
+                    disabled={isLoggingIn}
+                    className="w-full bg-[#243344] hover:bg-[#f4c03b] hover:text-[#243344] text-white font-extrabold text-xs uppercase tracking-widest py-4 transition-all duration-300 shadow cursor-pointer mt-4 flex items-center justify-center gap-2 disabled:opacity-70"
                   >
-                    Log In to Dashboard
+                    {isLoggingIn ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Verifying Credentials...</span>
+                      </>
+                    ) : (
+                      <span>Log In to Dashboard</span>
+                    )}
                   </button>
                 </form>
               </div>
@@ -141,7 +205,7 @@ export default function MyAccountPage() {
                   </div>
                 </div>
 
-                <form className="space-y-5">
+                <form onSubmit={handleRegisterSubmit} className="space-y-5">
                   <div>
                     <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
                       Corporate Email Address <span className="text-red-500">*</span>
@@ -165,14 +229,21 @@ export default function MyAccountPage() {
                     </label>
                     <div className="relative">
                       <input
-                        type="password"
+                        type={showRegPass ? 'text' : 'password'}
                         required
                         value={registerForm.password}
                         onChange={(e) => setRegisterForm({ ...registerForm, password: e.target.value })}
-                        className="w-full bg-white border border-gray-300 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b]"
+                        className="w-full bg-white border border-gray-300 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] pr-10"
                         placeholder="At least 8 characters..."
                       />
-                      <KeyRound className="w-4 h-4 text-gray-400 absolute right-3.5 top-3.5" />
+                      <button
+                        type="button"
+                        onClick={() => setShowRegPass(!showRegPass)}
+                        className="text-gray-400 hover:text-gray-600 absolute right-3.5 top-3.5 cursor-pointer"
+                        aria-label="Toggle password visibility"
+                      >
+                        {showRegPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
                     </div>
                   </div>
 
@@ -195,9 +266,17 @@ export default function MyAccountPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-[#f4c03b] hover:bg-[#243344] hover:text-white text-[#243344] font-extrabold text-xs uppercase tracking-widest py-4 transition-all duration-300 shadow cursor-pointer mt-4"
+                    disabled={isRegistering}
+                    className="w-full bg-[#f4c03b] hover:bg-[#243344] hover:text-white text-[#243344] font-extrabold text-xs uppercase tracking-widest py-4 transition-all duration-300 shadow cursor-pointer mt-4 flex items-center justify-center gap-2 disabled:opacity-70"
                   >
-                    Register Contractor Account
+                    {isRegistering ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Enrolling Contractor...</span>
+                      </>
+                    ) : (
+                      <span>Register Contractor Account</span>
+                    )}
                   </button>
                 </form>
               </div>
@@ -208,6 +287,12 @@ export default function MyAccountPage() {
 
       <Footer />
       <BackToTop />
+
+      <Toast
+        isOpen={Boolean(toastMessage)}
+        message={toastMessage}
+        onClose={() => setToastMessage(null)}
+      />
     </div>
   );
 }
