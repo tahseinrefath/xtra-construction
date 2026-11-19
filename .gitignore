@@ -35,3 +35,22 @@ next-env.d.ts
 
 # scratch / temp files
 webpage.html
+scratch_audit/
+
+# Task documentation (not for repository)
+*.pdf
+UI DEVELOPMENT TASK*.pdf
+
+# OS / editor artifacts
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+.idea/
+.vscode/
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

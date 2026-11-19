@@ -1,4 +1,5 @@
 import './globals.css';
+import { CartProvider } from '@/context/CartContext';
 
 export const metadata = {
   title: 'Construction 2 WordPress Theme – Building and Maintenance',
@@ -32,7 +33,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-screen flex flex-col font-sans text-[#243344] bg-white antialiased">
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

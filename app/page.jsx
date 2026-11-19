@@ -17,7 +17,9 @@ import ProcessSection from '@/components/home/ProcessSection';
 import ProjectsGallery from '@/components/home/ProjectsGallery';
 import QuoteSection from '@/components/home/QuoteSection';
 import TestimonialsSlider from '@/components/home/TestimonialsSlider';
+import MapSection from '@/components/home/MapSection';
 import PartnersBar from '@/components/home/PartnersBar';
+import CookieConsent from '@/components/ui/CookieConsent';
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -76,7 +78,10 @@ export default function HomePage() {
         {/* 10. Testimonials Slider */}
         <TestimonialsSlider />
 
-        {/* 11. Partners / Client Logos Bar */}
+        {/* 11. Map / Contact Section */}
+        <MapSection />
+
+        {/* 12. Partners / Client Logos Bar */}
         <PartnersBar />
       </main>
 
@@ -92,6 +97,9 @@ export default function HomePage() {
         message={searchFeedback}
         onClose={() => setSearchFeedback(null)}
       />
+
+      {/* Cookie Consent Banner */}
+      <CookieConsent />
     </div>
   );
 }

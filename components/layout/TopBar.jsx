@@ -64,12 +64,6 @@ export default function TopBar({ onOpenSearch }) {
             <span className="text-[11px] uppercase tracking-wider font-semibold">Search</span>
           </button>
 
-          <a
-            href="#quote"
-            className="bg-[#f4c03b] text-[#243344] font-bold text-[11px] uppercase tracking-wider px-3.5 py-1.5 hover:bg-white transition-colors"
-          >
-            Free Consultation
-          </a>
         </div>
       </div>
     </div>
