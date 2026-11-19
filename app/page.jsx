@@ -1,105 +1,47 @@
-'use client';
+import HomeView from '@/components/views/HomeView';
 
-import React, { useState } from 'react';
-import TopBar from '@/components/layout/TopBar';
-import Header from '@/components/layout/Header';
-import MobileDrawer from '@/components/layout/MobileDrawer';
-import SearchModal from '@/components/layout/SearchModal';
-import Footer from '@/components/layout/Footer';
-import BackToTop from '@/components/layout/BackToTop';
-import Toast from '@/components/ui/Toast';
+export const metadata = {
+  title: 'XTRA Construction – Premier Civil Engineering & General Contracting',
+  description:
+    'Comprehensive construction, civil engineering, road works, and facility maintenance solutions built with superior quality, precision, and OSHA-certified safety.',
+  keywords: [
+    'Construction',
+    'Building Engineering',
+    'Civil Engineering',
+    'Road Works',
+    'Facility Maintenance',
+    'General Contractor',
+    'Commercial Architecture',
+  ],
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'XTRA Construction – Premier Civil Engineering & General Contracting',
+    description:
+      'Over 25 years of master construction, commercial developments, and LEED certified building techniques.',
+    url: '/',
+    siteName: 'XTRA Construction',
+    images: [
+      {
+        url: '/assets/about-company.jpg',
+        width: 800,
+        height: 765,
+        alt: 'XTRA Construction Headquarters & Team',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'XTRA Construction – Premier Civil Engineering & General Contracting',
+    description:
+      'Over 25 years of master construction, commercial developments, and LEED certified building techniques.',
+    images: ['/assets/about-company.jpg'],
+  },
+};
 
-import HeroSlider from '@/components/home/HeroSlider';
-import FeatureCards from '@/components/home/FeatureCards';
-import AboutSection from '@/components/home/AboutSection';
-import ServicesSection from '@/components/home/ServicesSection';
-import ProcessSection from '@/components/home/ProcessSection';
-import ProjectsGallery from '@/components/home/ProjectsGallery';
-import QuoteSection from '@/components/home/QuoteSection';
-import TestimonialsSlider from '@/components/home/TestimonialsSlider';
-import MapSection from '@/components/home/MapSection';
-import PartnersBar from '@/components/home/PartnersBar';
-import CookieConsent from '@/components/ui/CookieConsent';
-
-export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchFeedback, setSearchFeedback] = useState(null);
-
-  const handleSearch = (term) => {
-    setSearchFeedback(`Searching for "${term}" across all projects and services.`);
-  };
-
-  return (
-    <div className="flex-1 flex flex-col min-h-screen">
-      {/* 1. Top Bar */}
-      <TopBar onOpenSearch={() => setSearchOpen(true)} />
-
-      {/* 2. Main Sticky Header */}
-      <Header onOpenMobile={() => setMobileMenuOpen(true)} />
-
-      {/* Mobile Drawer */}
-      <MobileDrawer
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-        onOpenSearch={() => setSearchOpen(true)}
-      />
-
-      {/* Search Modal */}
-      <SearchModal
-        isOpen={searchOpen}
-        onClose={() => setSearchOpen(false)}
-        onSearch={handleSearch}
-      />
-
-      {/* Main Content Body */}
-      <main className="flex-1">
-        {/* 3. Hero Section Slider */}
-        <HeroSlider />
-
-        {/* 4. Features At A Glance (Overlapping Hero) */}
-        <FeatureCards />
-
-        {/* 5. About Our Company */}
-        <AboutSection />
-
-        {/* 6. Construction Services & Dream Callout */}
-        <ServicesSection />
-
-        {/* 7. Process of Construction (01, 02, 03 Steps) */}
-        <ProcessSection />
-
-        {/* 8. Portfolio Showcase / Latest Projects */}
-        <ProjectsGallery />
-
-        {/* 9. Request a Free & Fair Quote Form */}
-        <QuoteSection />
-
-        {/* 10. Testimonials Slider */}
-        <TestimonialsSlider />
-
-        {/* 11. Map / Contact Section */}
-        <MapSection />
-
-        {/* 12. Partners / Client Logos Bar */}
-        <PartnersBar />
-      </main>
-
-      {/* 12. Footer & Copyright Bar */}
-      <Footer />
-
-      {/* Floating Back to Top Button */}
-      <BackToTop />
-
-      {/* Feedback Toast */}
-      <Toast
-        isOpen={Boolean(searchFeedback)}
-        message={searchFeedback}
-        onClose={() => setSearchFeedback(null)}
-      />
-
-      {/* Cookie Consent Banner */}
-      <CookieConsent />
-    </div>
-  );
+export default function Page() {
+  return <HomeView />;
 }
