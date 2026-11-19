@@ -129,15 +129,27 @@ All content, assets, and layouts are encoded in a clean, maintainable React comp
 ```
 Jayam Task/
 │
-├── app/                          # Next.js App Router
-│   ├── layout.jsx                # Root layout — fonts, metadata, viewport
-│   ├── page.jsx                  # Home page — composes all 12 sections
+├── app/                          # Next.js App Router (All 9 Routes)
+│   ├── layout.jsx                # Root layout — fonts, metadata, CartProvider wrapper
+│   ├── page.jsx                  # Home page — 12 sections + Map + Cookie Consent
+│   ├── about/page.jsx            # About Our Company — Narrative, 3 Pillars, Leadership, Skills
+│   ├── services/page.jsx         # Services Catalog — 6-Service Grid, Best Practices, FAQs
+│   ├── faq/page.jsx              # FAQ Knowledge Base — Categorized Accordions & Ask Us
+│   ├── blog/page.jsx             # Technical Insights — 4 Articles, Search, Categories, Tags
+│   ├── shop/page.jsx             # Contractor Store — Packages, Ratings, Add to Cart
+│   ├── cart/page.jsx             # Shopping Cart — Steppers, Coupons, Order Totals, Upsells
+│   ├── my-account/page.jsx       # Client Portal — Dual Login & Register with Validation
+│   ├── contact/page.jsx          # Official Inquiries — Map, Dispatch Cards, RFP Form
 │   └── globals.css               # Tailwind directives + custom CSS utilities
+│
+├── context/
+│   └── CartContext.jsx           # Global shopping cart context & reducer
 │
 ├── components/
 │   ├── layout/                   # Structural layout components
-│   │   ├── TopBar.jsx            # Top info bar — phone, socials, search, CTA
-│   │   ├── Header.jsx            # Sticky navigation header with dropdown
+│   │   ├── TopBar.jsx            # Top bar — phone, socials, search trigger
+│   │   ├── Header.jsx            # Sticky navigation with dropdown & active route state
+│   │   ├── PageBanner.jsx        # Subpage hero banner with dynamic breadcrumbs
 │   │   ├── MobileDrawer.jsx      # Off-canvas mobile navigation drawer
 │   │   ├── SearchModal.jsx       # Full-screen keyword search overlay
 │   │   ├── Footer.jsx            # Footer with logo, socials, copyright bar
@@ -152,12 +164,14 @@ Jayam Task/
 │   │   ├── ProjectsGallery.jsx   # Filterable portfolio + Lightbox modal
 │   │   ├── QuoteSection.jsx      # Quote request form with validation
 │   │   ├── TestimonialsSlider.jsx # Customer review carousel
+│   │   ├── MapSection.jsx        # Interactive location map + contact cards + quick form
 │   │   └── PartnersBar.jsx       # 5 client/partner logo showcase
 │   │
 │   └── ui/                       # Reusable atomic UI primitives
 │       ├── Button.jsx            # Multi-variant button (primary/secondary/outline)
 │       ├── SectionHeading.jsx    # Tag + subtitle + title + description block
 │       ├── LightboxModal.jsx     # Full-screen image preview modal
+│       ├── CookieConsent.jsx     # Persistent cookie consent banner with localStorage
 │       └── Toast.jsx             # Auto-dismissing notification toast
 │
 ├── data/
@@ -165,26 +179,54 @@ Jayam Task/
 │
 ├── public/
 │   └── assets/                   # 28 locally bundled images, logos, and icons
-│       ├── logo-construction.png
-│       ├── footer-logo-construction.png
-│       ├── about-company.jpg
-│       ├── service-1.jpg / service-2.jpg / service-3.jpg
-│       ├── s1.png / s2.png / s3.png
-│       ├── process.jpg
-│       ├── row-bg.jpg
-│       ├── safety-icon.png
-│       ├── portfolio[1-8].jpg    # 8 project gallery images
-│       ├── team[1-3].jpg         # 3 testimonial avatars
-│       └── logo-[1-5].png        # 5 client brand logos
 │
-├── .gitignore
+├── .gitignore                    # Excludes node_modules, .next, *.pdf, scratch_audit/
 ├── jsconfig.json                 # Path alias: @/* → root
 ├── next.config.mjs               # Next.js configuration
 ├── postcss.config.mjs            # PostCSS for Tailwind
 ├── tailwind.config.js            # Custom design tokens
 ├── package.json
-└── README.md                     # This file
+└── README.md                     # Comprehensive corporate documentation
 ```
+
+---
+
+## 🚀 25-Commit Git Strategy & PR Release Workflow
+
+Development followed a structured **25-commit development cycle** on branch `dev` with **4 Pull Request milestones** into branch `prod`:
+
+| Milestone | Commit | Type & Scope | Commit Description |
+| :--- | :--- | :--- | :--- |
+| **Milestone 1** | `b8b9521` | `chore` | `chore: update gitignore to exclude task pdf and scratch artifacts` |
+| | **Commit 1** | `fix(navbar)` | Remove duplicate free consultation CTA from top bar |
+| | **Commit 2** | `feat(ui)` | Add professional cookie consent banner with persistence |
+| | **Commit 3** | `feat(home)` | Create interactive map section with 3 contact detail cards |
+| | **Commit 4** | `feat(home)` | Integrate map section and overlapping quote form on homepage |
+| | **Commit 5** | `feat(ui)` | Implement reusable PageBanner component for sub-routes |
+| | **Commit 6** | `feat(store)` | Configure CartContext state for shopping cart management |
+| **PR #1** | 🔀 | **Merge PR #1** | Landing Page Enhancements & State Foundation (`dev` → `prod`) |
+| **Milestone 2** | **Commit 7** | `feat(about)` | Create about page structure with company narrative |
+| | **Commit 8** | `feat(about)` | Add leadership team and animated skill proficiency bars |
+| | **Commit 9** | `feat(services)` | Implement full 6-service grid on services page |
+| | **Commit 10** | `feat(services)` | Add construction tips callout and quick FAQs |
+| | **Commit 11** | `feat(contact)` | Build dedicated contact page with map and office details |
+| | **Commit 12** | `feat(contact)` | Add contact form submission handling with feedback toast |
+| **PR #2** | 🔀 | **Merge PR #2** | Corporate Pages: About, Services, Contact (`dev` → `prod`) |
+| **Milestone 3** | **Commit 13** | `feat(faq)` | Build interactive FAQ page with categorized accordions |
+| | **Commit 14** | `feat(faq)` | Add fast-inquiry ask us form widget on FAQ page |
+| | **Commit 15** | `feat(blog)` | Implement construction blog listing with article cards |
+| | **Commit 16** | `feat(blog)` | Add blog sidebar with search, categories, and pagination |
+| | **Commit 17** | `feat(shop)` | Create shop catalog page with construction packages and ratings |
+| | **Commit 18** | `feat(shop)` | Add add-to-cart trigger and pricing badges |
+| **PR #3** | 🔀 | **Merge PR #3** | Knowledge Base & Commerce Store (`dev` → `prod`) |
+| **Milestone 4** | **Commit 19** | `feat(cart)` | Build shopping cart table with quantity adjusters and removal |
+| | **Commit 20** | `feat(cart)` | Implement coupon discount logic and order summary box |
+| | **Commit 21** | `feat(cart)` | Add empty cart placeholder and product upsell carousel |
+| | **Commit 22** | `feat(account)` | Build dual login and registration tabs on my-account page |
+| | **Commit 23** | `feat(account)` | Add client authentication validation and password toggles |
+| | **Commit 24** | `feat(nav)` | Synchronize global header and footer links to all subpages |
+| | **Commit 25** | `chore(release)` | Complete responsive QA audit, production build, and docs |
+| **PR #4** | 🔀 | **Merge PR #4** | Full Multi-Page Release & Final Production Build (`dev` → `prod`) |
 
 ---
 
