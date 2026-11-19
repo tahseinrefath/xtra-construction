@@ -76,8 +76,6 @@ export const siteData = {
         "Zero-compromise compliance with international safety benchmarks, rigorous hazard assessments, and modern protective protocols.",
       icon: "ShieldCheck",
       badge: "02",
-      highlighted: true,
-      imageIcon: "/assets/safety-icon.png",
     },
     {
       id: "feature-3",
