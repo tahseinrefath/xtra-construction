@@ -37,7 +37,7 @@ export default function BlogPage() {
       category: 'ARCHITECTURE',
       date: 'October 14, 2026',
       author: 'Arthur Vance',
-      image: '/assets/portfolio7-600x600.jpg',
+      image: '/assets/portfolio7-1-600x600.jpg',
       excerpt:
         'Investigating how decoupled acoustic drywall, resilient channels, and vibration-dampening neoprene pads create sound-isolated residential sanctuaries within busy metropolitan towers.',
       readTime: '6 min read',
@@ -61,7 +61,7 @@ export default function BlogPage() {
       category: 'ENGINEERING',
       date: 'September 29, 2026',
       author: 'Elena Rostova',
-      image: '/assets/portfolio10-600x600.jpg',
+      image: '/assets/portfolio10-1-600x600.jpg',
       excerpt:
         'Analyzing continuous polyisocyanurate exterior insulation, thermal bridge break fasteners, and triple-pane low-E glazing systems under severe sub-zero thermal stresses.',
       readTime: '8 min read',
@@ -90,9 +90,9 @@ export default function BlogPage() {
   ];
 
   const recentPosts = [
-    { title: 'Seismic Soil Liquefaction Countermeasures', date: 'Oct 19, 2026', image: '/assets/portfolio3-600x600.jpg' },
-    { title: 'Post-Tensioned Slab Reinforcements', date: 'Oct 11, 2026', image: '/assets/portfolio6-600x600.jpg' },
-    { title: 'BIM 5D Cost Control in Complex Builds', date: 'Sep 24, 2026', image: '/assets/portfolio9-600x600.jpg' },
+    { title: 'Seismic Soil Liquefaction Countermeasures', date: 'Oct 19, 2026', image: '/assets/portfolio3-1-600x600.jpg' },
+    { title: 'Post-Tensioned Slab Reinforcements', date: 'Oct 11, 2026', image: '/assets/portfolio6-1-600x600.jpg' },
+    { title: 'BIM 5D Cost Control in Complex Builds', date: 'Sep 24, 2026', image: '/assets/portfolio9-1-600x600.jpg' },
   ];
 
   const tags = ['#SteelFrame', '#LEEDPlatinum', '#ConcretePours', '#BIMModeling', '#OSHA30', '#ThermalBreak', '#SoilMechanics'];

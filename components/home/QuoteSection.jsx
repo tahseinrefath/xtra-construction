@@ -58,7 +58,7 @@ export default function QuoteSection() {
   return (
     <section
       id="quote"
-      className="relative py-20 md:py-28 bg-[#1c2734] text-white bg-cover bg-center overflow-hidden"
+      className="scroll-mt-20 md:scroll-mt-24 relative py-20 md:py-28 bg-[#1c2734] text-white bg-cover bg-center overflow-hidden"
       style={{
         backgroundImage: `url('${quote.bgImage}')`,
       }}
