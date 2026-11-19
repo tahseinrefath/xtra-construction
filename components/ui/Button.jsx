@@ -14,19 +14,21 @@ export default function Button({
   ...props
 }) {
   const baseStyles =
-    'inline-flex items-center justify-center font-bold tracking-wider uppercase transition-all duration-300 rounded-none cursor-pointer focus:outline-none';
+    'inline-flex items-center justify-center font-extrabold tracking-wider uppercase transition-all duration-300 rounded-none cursor-pointer focus:outline-none';
 
   const variants = {
     primary:
-      'bg-[#f4c03b] text-[#243344] hover:bg-[#243344] hover:text-[#f4c03b] shadow-sm',
+      'bg-[#f4c03b] text-[#243344] hover:bg-white hover:text-[#243344] shadow-md hover:shadow-xl active:scale-[0.98]',
+    primaryDarkHover:
+      'bg-[#f4c03b] text-[#243344] hover:bg-[#243344] hover:text-white shadow-md hover:shadow-xl active:scale-[0.98]',
     secondary:
-      'bg-[#243344] text-white hover:bg-[#f4c03b] hover:text-[#243344]',
+      'bg-[#243344] text-white hover:bg-[#f4c03b] hover:text-[#243344] active:scale-[0.98]',
     outline:
-      'border-2 border-white text-white hover:bg-[#f4c03b] hover:border-[#f4c03b] hover:text-[#243344]',
+      'border-2 border-white text-white hover:bg-[#f4c03b] hover:border-[#f4c03b] hover:text-[#243344] active:scale-[0.98]',
     outlineDark:
-      'border-2 border-[#243344] text-[#243344] hover:bg-[#243344] hover:text-[#f4c03b]',
+      'border-2 border-[#243344] text-[#243344] hover:bg-[#243344] hover:text-[#f4c03b] active:scale-[0.98]',
     white:
-      'bg-white text-[#243344] hover:bg-[#f4c03b] hover:text-[#243344] shadow-md',
+      'bg-white text-[#243344] hover:bg-[#f4c03b] hover:text-[#243344] shadow-md active:scale-[0.98]',
   };
 
   const sizes = {
