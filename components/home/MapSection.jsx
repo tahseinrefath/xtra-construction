@@ -55,7 +55,7 @@ export default function MapSection() {
       <div className="relative w-full h-[520px] md:h-[560px] overflow-hidden bg-gray-200">
         <iframe
           title="Jayam Construction New York Headquarters"
-          src="https://maps.google.com/maps?q=Financial+District,+Lower+Manhattan,+New+York,+NY&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          src="https://maps.google.com/maps?q=Financial+District,+Lower+Manhattan,+New+York,+NY&t=m&z=14&ie=UTF8&iwloc=&output=embed"
           className="absolute inset-0 w-full h-full border-0 grayscale-[25%] contrast-[1.05]"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -69,7 +69,7 @@ export default function MapSection() {
               href={href}
               target={label === 'Address' ? '_blank' : undefined}
               rel="noopener noreferrer"
-              className="flex items-center gap-4 bg-white/98 backdrop-blur-md rounded-2xl px-5 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 border border-black/5 group hover:-translate-y-0.5"
+              className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 shadow-xl hover:shadow-2xl transition-all duration-300 border border-black/5 group hover:-translate-y-0.5"
             >
               <div className="w-12 h-12 rounded-xl bg-[#f4c03b] flex items-center justify-center flex-shrink-0 group-hover:bg-[#243344] transition-colors shadow-sm">
                 <Icon className="w-6 h-6 text-[#243344] group-hover:text-[#f4c03b] transition-colors stroke-[2]" />
@@ -88,7 +88,7 @@ export default function MapSection() {
 
         {/* Floating Quick Dispatch Form — Top-Right */}
         <div className="hidden md:block absolute top-6 right-6 bottom-6 z-20 w-80 lg:w-96">
-          <div className="bg-[#243344]/95 backdrop-blur-md rounded-2xl p-7 h-full flex flex-col shadow-2xl border border-white/10">
+          <div className="bg-[#243344] rounded-2xl p-7 h-full flex flex-col shadow-2xl border border-white/10">
             <h3 className="text-white font-extrabold text-base uppercase tracking-wider mb-4 flex items-center gap-2">
               <span className="w-1.5 h-5 bg-[#f4c03b] rounded-full inline-block" />
               Dispatch Inquiry
