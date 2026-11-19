@@ -9,11 +9,37 @@ import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
 import PageBanner from '@/components/layout/PageBanner';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { Phone, Mail, MapPin, Clock, Globe } from 'lucide-react';
+import Toast from '@/components/ui/Toast';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+  Loader2,
+  CheckCircle2,
+  Building,
+  User,
+  MessageSquare,
+} from 'lucide-react';
 
 export default function ContactPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    department: 'Business Department',
+    subject: '',
+    message: '',
+    agree: true,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const contactCards = [
     {
@@ -45,6 +71,33 @@ export default function ContactPage() {
       actionHref: '#',
     },
   ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setToastMessage('Please fill in all required fields.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    await new Promise((r) => setTimeout(r, 1500));
+    setIsSubmitting(false);
+    setSubmitted(true);
+    setToastMessage(`Thank you, ${formData.name}! Your message has been routed to the ${formData.department}.`);
+
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        department: 'Business Department',
+        subject: '',
+        message: '',
+        agree: true,
+      });
+    }, 4000);
+  };
 
   return (
     <div className="flex-1 flex flex-col min-h-screen">
@@ -112,6 +165,181 @@ export default function ContactPage() {
           </div>
         </section>
 
+        {/* Dispatch Message & RFP Submission Form */}
+        <section className="py-20 bg-[#f7f9fb] border-t border-gray-200">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white shadow-2xl border border-gray-100 overflow-hidden">
+              <div className="bg-[#243344] px-8 py-6 flex items-center justify-between">
+                <div>
+                  <span className="text-xs uppercase font-extrabold tracking-widest text-[#f4c03b]">
+                    ONLINE DISPATCH & TENDERS
+                  </span>
+                  <h3 className="text-xl font-bold text-white mt-1">
+                    Send an Official Project Inquiry
+                  </h3>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 text-gray-300 text-xs">
+                  <span className="w-2.5 h-2.5 bg-green-400 rounded-full animate-ping" />
+                  <span>Engineers On Call</span>
+                </div>
+              </div>
+
+              <div className="p-8 sm:p-12">
+                {submitted ? (
+                  <div className="py-12 text-center flex flex-col items-center justify-center">
+                    <CheckCircle2 className="w-16 h-16 text-[#f4c03b] mb-4 animate-bounce" />
+                    <h4 className="text-2xl font-bold text-[#243344] mb-2">Message Dispatched!</h4>
+                    <p className="text-sm text-gray-600 max-w-md">
+                      Your inquiry has been cataloged in our management portal. Our lead estimator will review the documents and contact you within 24 business hours.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Name */}
+                      <div>
+                        <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
+                          Your Full Name <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            required
+                            placeholder="Arthur Vance"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            className="w-full bg-[#f7f9fb] border border-gray-200 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] transition-colors"
+                          />
+                          <User className="w-4 h-4 text-gray-400 absolute right-3.5 top-3.5" />
+                        </div>
+                      </div>
+
+                      {/* Email */}
+                      <div>
+                        <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
+                          Corporate Email Address <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="email"
+                            required
+                            placeholder="vance@corporation.com"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className="w-full bg-[#f7f9fb] border border-gray-200 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] transition-colors"
+                          />
+                          <Mail className="w-4 h-4 text-gray-400 absolute right-3.5 top-3.5" />
+                        </div>
+                      </div>
+
+                      {/* Phone */}
+                      <div>
+                        <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
+                          Telephone Number
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="tel"
+                            placeholder="+1 (818) 000-0000"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            className="w-full bg-[#f7f9fb] border border-gray-200 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] transition-colors"
+                          />
+                          <Phone className="w-4 h-4 text-gray-400 absolute right-3.5 top-3.5" />
+                        </div>
+                      </div>
+
+                      {/* Department */}
+                      <div>
+                        <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
+                          Target Department
+                        </label>
+                        <div className="relative">
+                          <select
+                            value={formData.department}
+                            onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                            className="w-full bg-[#f7f9fb] border border-gray-200 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] transition-colors"
+                          >
+                            <option value="Business Department">Business Department</option>
+                            <option value="Architecture & Planning">Architecture & Planning</option>
+                            <option value="Structural Engineering">Structural Engineering</option>
+                            <option value="Tender Submissions & RFPs">Tender Submissions & RFPs</option>
+                            <option value="Facility Maintenance">Facility Maintenance</option>
+                          </select>
+                          <Building className="w-4 h-4 text-gray-400 absolute right-3.5 top-3.5 pointer-events-none" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Subject */}
+                    <div>
+                      <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
+                        Subject Line <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Commercial Office Building Tender - Phase 2"
+                        value={formData.subject}
+                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        className="w-full bg-[#f7f9fb] border border-gray-200 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] transition-colors"
+                      />
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label className="block text-xs uppercase font-bold text-[#243344] mb-2">
+                        Detailed Project Scope & Requirements <span className="text-red-500">*</span>
+                      </label>
+                      <textarea
+                        rows={5}
+                        required
+                        placeholder="Please outline site location, gross square footage, anticipated timeline, and any special geotechnical requirements..."
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="w-full bg-[#f7f9fb] border border-gray-200 px-4 py-3 text-sm text-[#243344] focus:outline-none focus:border-[#f4c03b] transition-colors resize-y"
+                      />
+                    </div>
+
+                    {/* Agreement Checkbox */}
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        id="agree"
+                        checked={formData.agree}
+                        onChange={(e) => setFormData({ ...formData, agree: e.target.checked })}
+                        className="w-4 h-4 accent-[#f4c03b] rounded cursor-pointer"
+                      />
+                      <label htmlFor="agree" className="text-xs text-gray-600 cursor-pointer select-none">
+                        I understand that data submitted will be processed in accordance with the corporate privacy policy and ISO 9001 quality guidelines.
+                      </label>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto bg-[#f4c03b] text-[#243344] font-extrabold text-xs uppercase tracking-widest px-8 py-4 hover:bg-[#243344] hover:text-white transition-all duration-300 shadow flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Encrypting & Dispatching...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          <span>Dispatch Inquiry to Estimators</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Full Interactive Map Embed */}
         <section className="relative w-full h-[450px] overflow-hidden bg-gray-100 border-t border-gray-200">
           <iframe
@@ -125,6 +353,12 @@ export default function ContactPage() {
 
       <Footer />
       <BackToTop />
+
+      <Toast
+        isOpen={Boolean(toastMessage)}
+        message={toastMessage}
+        onClose={() => setToastMessage(null)}
+      />
     </div>
   );
 }
