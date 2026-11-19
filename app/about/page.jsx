@@ -134,6 +134,7 @@ export default function AboutPage() {
                   subtitle="It's All About Quality & Craftsmanship"
                   title="Leading the Construction Industry with Distinction"
                   description="Founded on the principles of engineering honesty, safety, and rigorous execution, our firm has delivered over 450 major architectural and industrial projects worldwide. We blend traditional craftsmanship with BIM modeling and eco-friendly standards."
+                  align="left"
                 />
 
                 <div className="mt-8 space-y-4">
@@ -207,6 +208,8 @@ export default function AboutPage() {
                   subtitle="Why Choose Our Team?"
                   title="Delivering Proven Mastery Across Modern Disciplines"
                   description="Our interdisciplinary team combines half a century of cumulative construction science. We hold international accreditations in structural safety, civil drafting, and LEED certified building techniques."
+                  align="left"
+                  theme="dark"
                   dark
                 />
 

@@ -7,10 +7,12 @@ export default function SectionHeading({
   description,
   align = 'center',
   theme = 'light',
+  dark = false,
+  centered,
   className = '',
 }) {
-  const isCenter = align === 'center';
-  const isDark = theme === 'dark';
+  const isCenter = centered !== undefined ? Boolean(centered) : align === 'center';
+  const isDark = Boolean(dark) || theme === 'dark';
 
   return (
     <div
