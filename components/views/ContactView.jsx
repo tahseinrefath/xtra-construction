@@ -343,7 +343,7 @@ export default function ContactView() {
         <section className="relative w-full h-[450px] overflow-hidden bg-gray-100 border-t border-gray-200">
           <iframe
             title="Office Location Map"
-            src="https://maps.google.com/maps?q=Financial+District,+Lower+Manhattan,+New+York,+NY&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            src="https://maps.google.com/maps?q=Financial+District,+Lower+Manhattan,+New+York,+NY&t=m&z=14&ie=UTF8&iwloc=&output=embed"
             className="w-full h-full border-0 grayscale-[25%] contrast-[1.05]"
             loading="lazy"
           />
