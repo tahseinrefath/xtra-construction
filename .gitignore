@@ -36,6 +36,8 @@ next-env.d.ts
 # scratch / temp files
 webpage.html
 scratch_audit/
+scratch/
+Project (Xtra construction)/
 
 # Task documentation (not for repository)
 *.pdf
